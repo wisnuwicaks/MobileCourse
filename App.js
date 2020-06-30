@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -65,16 +65,17 @@ const StylingDasar = () => {
 };
 
 const Crud = () => {
+  const [inputText, setInputText] = useState('');
+  const [todoList, setTodoList] = useState([]);
 
-  const[inputText,setInputText] = useState("")
-  const inputHandler =(text)=>{
+  const inputHandler = text => {
     // console.log("Input Handler",text);
-    setInputText(text)
+    setInputText(text);
     console.log(inputText);
-    
-  }
+  };
   const addToDoHandler = () => {
     console.log('PRESS');
+    setTodoList([...todoList, inputText]);
   };
   return (
     <>
@@ -85,9 +86,16 @@ const Crud = () => {
           alignItems: 'center',
         }}>
         <SafeAreaView />
-      <Text>{inputText}</Text>
+        <Text>{inputText}</Text>
+        {
+        todoList.map(val => {
+          return (
+          <Text>{val}</Text>
+          );
+        })
+        }
         <TextInput
-        onChangeText={inputHandler}
+          onChangeText={inputHandler}
           style={{
             borderWidth: 1,
             borderColor: 'red',
